@@ -1,0 +1,35 @@
+DDL - 데이터 정의어
+primary key 기본키 지정
+unique 대체키(중복값 불가)
+foreign key ~ references 외래키(다른테이블 참조)
+no action 참조테이블 변화에서 해당 테이블 보호
+cascade 참조테이블 삭제시 해당 테이블 삭제
+set null 변화시 기존값 null로 대체
+set default 변화시 기존값 대체
+constraint 제약조건 이름 지정
+check 속성에 대한 제약조건 정의(설정한 값만 사용가능)
+
+altertable 테이블명 add 열 추가/ alter 속성 변경 / drop column 속성삭제
+
+drop table / schema / domain / view / index / constraint
+
+create table patient(id char(5) primary key, name char(10), sex char(1), phone char(20),
+constraint sex_ck check (sex='f' or sex='m'),
+constraint id_fk foreign key(id) references doctor(doc_id));
+
+create table instructor(id char(5) primary key, name char(15) not null, dept char(15),
+foreign key(dept) references department(dept) on delete set null on update cascade);
+
+alter table patient add job char(20);
+
+create view cc(ccid, ccname, instname) as
+select c.ccid, c.ccname, i.instname
+from course c, instructor i, 
+where c.instructor=i.id);
+
+create unique index stud_idx on student(ssn ASC);
+
+create domain 직위 varchar2(10) default '사원' constraint valid-직위  
+
+DCL
+DML
